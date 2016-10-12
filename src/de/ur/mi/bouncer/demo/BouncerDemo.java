@@ -8,7 +8,13 @@ import de.ur.mi.bouncer.apps.BouncerApp;
 public class BouncerDemo extends BouncerApp {
     @Override
     public void bounce() {
-        loadMap("Painter");
+        loadMap("Empty");
+        bouncer.move();
+        bouncer.move();
+        bouncer.move();
+        setAnimationSpeedInFramesPerSecond(28);
+        bouncer.move();
+        bouncer.move();
         bouncer.move();
     }
 }

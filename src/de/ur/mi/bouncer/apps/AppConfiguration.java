@@ -1,5 +1,9 @@
 package de.ur.mi.bouncer.apps;
+
+
 public class AppConfiguration {
+
+	private int frameRate = 7;
 
 	public int defaultWindowSize() {
 		return 600;
@@ -14,7 +18,7 @@ public class AppConfiguration {
 	}
 
 	public int frameRate() {
-		return 7;
+		return frameRate;
 	}
 
 	public int smoothLevel() {
@@ -64,4 +68,10 @@ public class AppConfiguration {
 	public int collisionColor() {
 		return 0xFFFF9933;
 	}
+
+	public void setFrameRate(int frameRate) {
+		this.frameRate = frameRate;
+	}
+
+
 }

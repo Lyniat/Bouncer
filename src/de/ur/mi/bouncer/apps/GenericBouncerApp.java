@@ -9,6 +9,7 @@ import de.ur.mi.bouncer.ui.WorldScene;
 import de.ur.mi.bouncer.world.TwoDimensionalWorld;
 import de.ur.mi.bouncer.world.loader.WorldLoader;
 import de.ur.mi.graphicsapp.GraphicsApp;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 		implements GraphicsContext, OnWorldChangedListener {
@@ -94,6 +95,10 @@ public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 		}
 		worldScene.setWorld(world);
 		bouncer.placeInWorld(world);
+	}
+
+	public final void setAnimationSpeedInFramesPerSecond(int fps) {
+		appConfig.setFrameRate(fps);
 	}
 
 	public void onWorldChanged() {
