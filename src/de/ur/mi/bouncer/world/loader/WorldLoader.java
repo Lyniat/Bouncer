@@ -14,8 +14,8 @@ public class WorldLoader {
 	
 	public TwoDimensionalWorld loadLocalMap(String mapName) {
 		try {
-			URL base = this.getClass().getResource(ASSET_FOLDER + mapName + ".xml");
-			File mapFile = new File(base.toURI());
+			String base = System.getProperty("user.dir") + ASSET_FOLDER + mapName + ".xml";
+			File mapFile = new File(base);
 			Document doc = Jsoup.parse(mapFile, "UTF-8");
 			return XmlWorldBuilder.fromXmlDocument(doc);
 		} catch (Exception e) {

@@ -19,6 +19,11 @@ public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 	private TwoDimensionalWorld world;
 	private WorldScene worldScene;
 	private int windowSize;
+	private int fps = 7;
+	private final int INCREASE_AMOUNT = 3;
+
+	private static final int KEY_CODE_F4 = 115;
+	private static final int KEY_CODE_F5 = 116;
 
 	public GenericBouncerApp() {
 		this(new WorldLoader());
@@ -58,7 +63,8 @@ public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 	private void setupApplet() {
 		windowSize = appConfig.windowSizeFor(displayHeight);
 		size(windowSize, windowSize);
-		smooth(appConfig.smoothLevel());
+		//Processing 3
+		//smooth(appConfig.smoothLevel());
 	}
 
 	public abstract T createBouncer();
@@ -96,6 +102,10 @@ public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 		bouncer.placeInWorld(world);
 	}
 
+	public final void setAnimationSpeedInFramesPerSecond(int fps) {
+		appConfig.setFrameRate(fps);
+	}
+
 	public void onWorldChanged() {
 		try {
 			Thread.sleep(1000 / appConfig.frameRate());
@@ -107,12 +117,36 @@ public abstract class GenericBouncerApp<T extends Bouncer> extends GraphicsApp
 
 	@Override
 	public void draw() {
-		super.draw();
+		//Processing 3
+		//super.draw();
 		worldScene.draw(this);
+	}
+
+	@Override
+	public void keyPressed(processing.event.KeyEvent event) {
+		super.keyPressed(event);
+		if (event.getKeyCode() == KEY_CODE_F4) {
+			decreaseSpeed();
+		}else if (event.getKeyCode() == KEY_CODE_F5) {
+			increaseSpeed();
+		}
 	}
 
 	public void rectModeCorner() {
 		rectMode(CORNER);
+	}
+
+	private void increaseSpeed(){
+		fps += INCREASE_AMOUNT;
+		setAnimationSpeedInFramesPerSecond(fps);
+	}
+
+	private void decreaseSpeed(){
+		fps -= INCREASE_AMOUNT;
+		if(fps < 1){
+			fps = 1;
+		}
+		setAnimationSpeedInFramesPerSecond(fps);
 	}
 
 }
